@@ -1,74 +1,63 @@
 let humanScore = 0;
 let computerScore = 0;
+let round = 0;
+
+const choices = ["rock", "paper","scissors"]
 
 
 function getComputerChoice(){
-    randomNumber = Math.random();
-    if(randomNumber < 0.3){
-        return "rock";
-    }if(randomNumber < 0.6){
-        return "paper";
-    }else{
-        return "scissors";
-    }
+    return choices[Math.floor(Math.random() * choices.length)];
 }
-console.log(getComputerChoice());
-
 
 function getHumanChoice(){
     let asnwer = prompt("paper, rock or scissors?").toLowerCase();
+    
     return asnwer;
 }
 
 function playRound(humanChoice, computerChoice){
-    
-    console.log(humanChoice + "Human Choice" + computerChoice + "Computer Choice");
-    switch(humanChoice){
-        case "paper": 
-            switch(computerChoice){
-                case "paper":
-                    console.log("Tie!");
-                    break;
-                case "rock":
-                    console.log("you win!");
-                    break;
-                case "scissors":
-                    console.log("computer wins!");
-                    break;
-            }
+    console.log("Round: "+ round + " Computer choice " + computerChoice);
+    console.log("Round: "+ round + " Human choice " + humanChoice);
+    switch(humanChoice + computerChoice){
+        case "scissorspaper":
+        case "rockscissors":
+        case "paperrock":
+            console.log("you win this round!");
+            humanScore++;
             break;
-        case "rock": 
-            switch(computerChoice){
-                case "paper":
-                    console.log("computer wins!");
-                    break;
-                case "rock":
-                    console.log("Tie!");
-                    break;
-                case "scissors":
-                    console.log("you win!");
-                    break;
-            break;
-        case "scissors": 
-            switch(computerChoice){
-                case "paper":
-                    console.log("you win!");
-                    break;
-                case "rock":
-                    console.log("computer wins!");
-                    break;
-                case "scissors":
-                    console.log("Tie!");
-                    break;
-            break;
-            }
-    
-        }
-    }
+        case "paperscissors":
+        case "scissorsrock":
+        case "rockpaper":
+            console.log("you loose this round!");
+            computerScore++;
+        break;
+        case "scissorsscissors":
+        case "rockrock":
+        case "paperpaper":
+            console.log("It's a tie for this round!");
+        break;
+    }   
 }
+
+function endGame(){
+    if(humanScore > computerScore)
+        console.log("The winner of the game is: You, a simple human");
+    else
+        console.log("The winner of the game is: Me, a sexy smart Computer")
+}
+
+function playGame(){
 
 const humanSelection = getHumanChoice();
 const computerSelection =  getComputerChoice();
 
 playRound(humanSelection, computerSelection);
+
+}
+   
+for (var i = 0; i < 5; i++) {
+    playGame();
+}
+  
+endGame();
 
